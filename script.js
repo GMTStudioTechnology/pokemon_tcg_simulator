@@ -542,3 +542,22 @@ document.addEventListener('mouseover', (e) => {
     }
 }, { passive: true });
 
+// Add reset history functionality
+document.getElementById('reset-history').addEventListener('click', function() {
+    // Clear the card history list
+    const historyList = document.getElementById('card-history-list');
+    historyList.innerHTML = '';
+    
+    // Optional: Add confirmation message
+    const confirmMessage = document.createElement('li');
+    confirmMessage.textContent = 'History has been cleared';
+    confirmMessage.style.color = '#ff6b6b';
+    confirmMessage.style.fontStyle = 'italic';
+    historyList.appendChild(confirmMessage);
+    
+    // Remove confirmation message after 2 seconds
+    setTimeout(() => {
+        confirmMessage.remove();
+    }, 2000);
+});
+

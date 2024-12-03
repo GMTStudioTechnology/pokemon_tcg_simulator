@@ -5,6 +5,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add filter functionality
     document.getElementById('rarity-filter').addEventListener('change', displayCollection);
     document.getElementById('sort-collection').addEventListener('click', displayCollection);
+    
+    // Add reset collection functionality
+    document.getElementById('reset-collection').addEventListener('click', function() {
+        if (confirm('Are you sure you want to reset your collection? This cannot be undone.')) {
+            // Clear the collection from localStorage
+            localStorage.removeItem('userCollection');
+            
+            // Clear the display
+            const container = document.getElementById('collection-container');
+            container.innerHTML = '';
+            
+            // Reset stats
+            document.getElementById('unique-cards').textContent = '0';
+            document.getElementById('total-cards').textContent = '0';
+            document.getElementById('completion-rate').textContent = '0%';
+            
+            // Optional: Show confirmation message
+            const message = document.createElement('div');
+            message.textContent = 'Collection has been reset';
+            message.style.textAlign = 'center';
+            message.style.color = '#ff6b6b';
+            message.style.padding = '20px';
+            container.appendChild(message);
+        }
+    });
 });
 
 function displayCollection() {

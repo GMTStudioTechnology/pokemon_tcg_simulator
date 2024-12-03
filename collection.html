@@ -18,6 +18,12 @@
     <meta name="theme-color" content="#151d23">
 </head>
 <body>
+    <script src="audio.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        playBGM();
+    });
+</script>
     <nav>
         <ul>
             <li><a href="index.html" class="nav-link">Home</a></li>
@@ -40,6 +46,7 @@
                 <option value="8">Crown Cards</option>
             </select>
             <button id="sort-collection">Sort Cards</button>
+            <button id="reset-collection" class="reset-button">Reset Collection</button>
         </div>
 
         <div id="collection-container">

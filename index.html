@@ -20,6 +20,12 @@
 </head>
 
 <body>
+    <script src="audio.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            playBGM();
+        });
+    </script>
     <nav>
         <ul>
             <li><a href="index.html" class="nav-link active">Home</a></li>
@@ -83,7 +89,10 @@
         <div id="high-rarity-cards"></div>
 
         <div id="card-history-container">
-            <h2>Card History</h2>
+            <div class="history-header">
+                <h2>Card History</h2>
+                <button id="reset-history" class="reset-button">Reset History</button>
+            </div>
             <ul id="card-history-list"></ul>
         </div>
 
@@ -97,5 +106,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
