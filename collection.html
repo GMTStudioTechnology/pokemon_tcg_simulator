@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A booster pack opening simulator for Pokemon TCG Pocket.">
+    <meta name="keywords" content="Pokemon, TCG, Pocket, Booster, Pack, Simulator">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Pokemon Pocket Booster Pack Simulator">
+    <meta property="og:description" content="A booster pack opening simulator for Pokemon TCG Pocket.">
+    <meta property="og:image" content="https://imgur.com/ErsF5F5">
+    <meta property="og:url" content="https://example.com">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="./src/favicon/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="./src/favicon/apple-touch-icon.png">
+    <title>Pokemon Pocket Booster Pack Simulator</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#151d23">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="packs.html" class="nav-link">Packs</a></li>
+            <li><a href="stats.html" class="nav-link">Stats</a></li>
+            <li><a href="collection.html" class="nav-link active">Collection</a></li>
+        </ul>
+    </nav>
+
+    <div id="scroll-wrapper">
+        <h1>Your Collection</h1>
+        
+        <div class="collection-filters">
+            <select id="rarity-filter">
+                <option value="all">All Rarities</option>
+                <option value="4">4♦ Cards</option>
+                <option value="5">1★ Cards</option>
+                <option value="6">2★ Cards</option>
+                <option value="7">3★ Cards</option>
+                <option value="8">Crown Cards</option>
+            </select>
+            <button id="sort-collection">Sort Cards</button>
+        </div>
+
+        <div id="collection-container">
+            <!-- Cards will be dynamically added here -->
+        </div>
+    </div>
+
+    <div class="collection-stats">
+        <h2>Collection Stats</h2>
+        <div id="collection-summary">
+            <div>Total Unique Cards: <span id="unique-cards">0</span></div>
+            <div>Total Cards: <span id="total-cards">0</span></div>
+            <div>Collection Completion: <span id="completion-rate">0%</span></div>
+        </div>
+    </div>
+
+    <script src="collection.js"></script>
+</body>
+</html> 

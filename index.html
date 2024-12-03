@@ -22,15 +22,31 @@
 <body>
     <nav>
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#packs">Packs</a></li>
-            <li><a href="#stats">Stats</a></li>
+            <li><a href="index.html" class="nav-link active">Home</a></li>
+            <li><a href="packs.html" class="nav-link">Packs</a></li>
+            <li><a href="stats.html" class="nav-link">Stats</a></li>
+            <li><a href="collection.html" class="nav-link">Collection</a></li>
         </ul>
     </nav>
 
     <div id="scroll-wrapper">
 
         <h1>Pokemon TCG Pocket Booster Pack Simulator</h1>
+
+        <div class="pack-preview-container">
+            <div class="pack-preview active" data-pack="charizard">
+                <img src="./src/favicon/Genetic-Apex-Charizard-1.jpg" alt="Charizard Pack">
+                <span class="pack-name">Charizard Pack</span>
+            </div>
+            <div class="pack-preview" data-pack="mewtwo">
+                <img src="./src/favicon/Genetic-Apex-Mewtwo.jpg" alt="Mewtwo Pack">
+                <span class="pack-name">Mewtwo Pack</span>
+            </div>
+            <div class="pack-preview" data-pack="pikachu">
+                <img src="./src/favicon/Genetic-Apex-Pikachu-1.jpg" alt="Pikachu Pack">
+                <span class="pack-name">Pikachu Pack</span>
+            </div>
+        </div>
 
         <div id="game-stats-container">
             <div id="poke-gold">Poke Gold Used: 0</div>
@@ -66,6 +82,11 @@
 
         <div id="high-rarity-cards"></div>
 
+        <div id="card-history-container">
+            <h2>Card History</h2>
+            <ul id="card-history-list"></ul>
+        </div>
+
     </div>
 
     <div id="card-modal" class="modal">
@@ -73,13 +94,6 @@
         <img class="modal-content" id="modal-image">
     </div>
 
-    <footer>
-        <div class="info">
-            <p>Not affiliated with <a href="https://tcgpocket.pokemon.com/en-us/" target="_blank">Pokemon TCG Pocket</a> or
-            <a href="https://www.gamefreak.co.jp/" target="_blank">Game Freak</a>.</p>
-            <p>Follow us on <a href="https://twitter.com" target="_blank">Twitter</a> | <a href="https://facebook.com" target="_blank">Facebook</a></p>
-        </div>
-    </footer>
 
     <script src="script.js"></script>
 </body>

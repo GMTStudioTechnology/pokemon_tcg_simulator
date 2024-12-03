@@ -337,23 +337,59 @@ function animatePackOpening() {
         packContainer.innerHTML = '';
 
         const packVisual = document.createElement('div');
-        packVisual.className = 'pack-visual';
+        packVisual.className = 'pack-visual loading';
         const selectedPack = document.getElementById('pack-select').value;
         packVisual.style.backgroundImage = `url('./src/images/pack_${selectedPack}.png')`;
         packContainer.appendChild(packVisual);
 
-        // Add a slight delay before animation
+        // Add sound effect
+        const openSound = new Audio('./src/sounds/pack_open.mp3');
+        openSound.play().catch(() => {}); // Catch errors if sound can't play
+
         setTimeout(() => {
             packVisual.classList.add('opening');
             setTimeout(() => {
                 packVisual.remove();
                 resolve();
-            }, 800); // Increased from 500 to 800 for smoother transition
+            }, 800);
         }, 500);
     });
 }
 
-// Modify the existing click event listener
+// Add a function to update the card history
+function updateCardHistory(pack) {
+    const historyList = document.getElementById('card-history-list');
+    pack.forEach(({ dex, name, rarity }) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `Dex: ${dex}, Name: ${name}, Rarity: ${rarity}`;
+        historyList.appendChild(listItem);
+    });
+}
+
+// Add after the existing variable declarations
+let userCollection = JSON.parse(localStorage.getItem('userCollection')) || {};
+
+// Function to add cards to collection
+function addToCollection(card) {
+    const cardKey = `${card.dex}-${card.name}`;
+    if (!userCollection[cardKey]) {
+        userCollection[cardKey] = {
+            dex: card.dex,
+            name: card.name,
+            rarity: card.rarity,
+            count: 0
+        };
+    }
+    userCollection[cardKey].count++;
+    saveCollection();
+}
+
+// Function to save collection to localStorage
+function saveCollection() {
+    localStorage.setItem('userCollection', JSON.stringify(userCollection));
+}
+
+// Modify the openPack event listener to add cards to collection
 document.getElementById('open-pack-button').addEventListener('click', async function() {
     // Disable button during animation
     this.disabled = true;
@@ -369,6 +405,13 @@ document.getElementById('open-pack-button').addEventListener('click', async func
 
     // Get pack contents
     const pack = openPack();
+    
+    // Add cards to collection
+    pack.forEach(card => addToCollection(card));
+
+    // Update card history
+    updateCardHistory(pack);
+
     const packContainer = document.getElementById('card-container');
     const rarePackContainer = document.getElementById('high-rarity-cards');
 
@@ -469,4 +512,33 @@ function openModal(imageSrc) {
         }
     };
 }
+
+// Add pack preview functionality
+document.querySelectorAll('.pack-preview').forEach(preview => {
+    preview.addEventListener('click', () => {
+        // Remove active class from all previews
+        document.querySelectorAll('.pack-preview').forEach(p => p.classList.remove('active'));
+        // Add active class to clicked preview
+        preview.classList.add('active');
+        // Update pack select value
+        document.getElementById('pack-select').value = preview.dataset.pack;
+    });
+});
+
+// Add navigation active state
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+    });
+});
+
+// Add card hover effect sound
+document.addEventListener('mouseover', (e) => {
+    if (e.target.closest('.card')) {
+        const hoverSound = new Audio('./src/sounds/card_hover.mp3');
+        hoverSound.volume = 0.2;
+        hoverSound.play().catch(() => {});
+    }
+}, { passive: true });
 
