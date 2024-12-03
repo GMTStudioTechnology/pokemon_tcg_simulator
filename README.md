@@ -1,5 +1,5 @@
-# Pokemon TCG Pocket Booster Pack Simulator
- A booster pack opening simulator for the mobile game Pokemon TCG Pocket
+# pokemon trade card game open pack simulator
 
-Try it yourself!
-https://ptcgpbps.github.io/
+Yaaaaaaaaaaa this is a enhanced version of  https://ptcgpbps.github.io/ 
+
+and I don;t know what to do :)
