@@ -14,6 +14,9 @@
     --fs-medium: clamp(0.9rem, 2vw, 1.1rem);
     --fs-large: clamp(1.1rem, 2.5vw, 1.4rem);
     --fs-xlarge: clamp(1.3rem, 3vw, 1.8rem);
+    --container-padding: clamp(8px, 3vw, 24px);
+    --card-gap: clamp(8px, 2vw, 24px);
+    --container-width: min(100%, 1400px);
 }
 
 /* Reset some basic styles for consistency across browsers */
@@ -110,24 +113,23 @@ button:active {
 #card-container {
     margin-top: 5px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));
-    gap: clamp(4px, 1vw, 16px);
-    padding: clamp(4px, 1vw, 16px);
+    grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr));
+    gap: var(--card-gap);
+    padding: var(--container-padding);
+    width: var(--container-width);
     justify-content: center; 
-    width: 100%;
-    max-width: none;
-    padding-bottom: 10px;
+    margin: 0 auto;
 }
 
 /* Styling for the container that holds the pack cards */
 #high-rarity-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));
-    gap: clamp(4px, 1vw, 16px);
-    padding: clamp(4px, 1vw, 16px);
+    grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr));
+    gap: var(--card-gap);
+    padding: var(--container-padding);
+    width: var(--container-width);
     justify-content: center; 
-    width: 100%;
-    max-width: none;
+    margin: 0 auto;
 }
 
 /* Styling for each card */
@@ -823,17 +825,20 @@ nav ul li a:hover::after {
 /* Collection Page Styling */
 .collection-filters {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
-    margin: 2rem 0;
+    gap: var(--card-gap);
+    padding: var(--container-padding);
+    width: var(--container-width);
+    margin: 0 auto;
 }
 
 #collection-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 24px;
-    padding: 24px;
-    max-width: 1400px;
+    grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
+    gap: var(--card-gap);
+    padding: var(--container-padding);
+    width: var(--container-width);
     margin: 0 auto;
 }
 
@@ -914,9 +919,10 @@ nav ul li a:hover::after {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
-    margin: 2rem 0;
-    padding: 0 1rem;
+    gap: var(--card-gap);
+    padding: var(--container-padding);
+    width: var(--container-width);
+    margin: 0 auto;
 }
 
 .collection-filters select,
@@ -937,10 +943,10 @@ nav ul li a:hover::after {
 
 #collection-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 1rem;
-    padding: 2rem;
-    max-width: 1200px;
+    grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
+    gap: var(--card-gap);
+    padding: var(--container-padding);
+    width: var(--container-width);
     margin: 0 auto;
 }
 
@@ -978,7 +984,7 @@ nav ul li a:hover::after {
     }
 
     #collection-container {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
         gap: 0.5rem;
         padding: 1rem;
     }
@@ -1058,10 +1064,10 @@ nav {
 /* Enhanced Collection Grid */
 #collection-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 24px;
-    padding: 24px;
-    max-width: 1400px;
+    grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
+    gap: var(--card-gap);
+    padding: var(--container-padding);
+    width: var(--container-width);
     margin: 0 auto;
 }
 
