@@ -10,6 +10,10 @@
     --accent-color: #ff6b6b;
     --success-color: #4ecdc4;
     --warning-color: #ffe66d;
+    --fs-small: clamp(0.75rem, 1.5vw, 0.9rem);
+    --fs-medium: clamp(0.9rem, 2vw, 1.1rem);
+    --fs-large: clamp(1.1rem, 2.5vw, 1.4rem);
+    --fs-xlarge: clamp(1.3rem, 3vw, 1.8rem);
 }
 
 /* Reset some basic styles for consistency across browsers */
@@ -21,11 +25,13 @@
 
 /* Allows scrolling of the entire webpage */
 #scroll-wrapper {
-    height: 100vh;
+    height: 100%;
     width: 100%; 
     overflow-y: auto; 
-    padding-top: 20px;
-    padding-bottom: 20px; 
+    padding: clamp(10px, 3vw, 20px);
+    padding-bottom: 20px;
+    position: relative;
+    min-height: 300px;
 }
 
 #scroll-wrapper::-webkit-scrollbar {
@@ -53,24 +59,26 @@ body {
     height: 100vh;
     text-align: center;
     color: #4b9ad2;
+    min-height: 100vh;
+    min-height: -webkit-fill-available; /* Mobile viewport fix */
 }
 
 /* Heading styles */
 h1 {
     margin-bottom: 10px;
     color: hsl(207, 97%, 87%);
-    font-size: 2em;
+    font-size: var(--fs-xlarge);
 }
 h2 {
     margin-bottom: 5px;
     color: hsl(207, 97%, 87%);
-    font-size: 1.5em;
+    font-size: var(--fs-large);
 }
 
 /* Button styling */
 button {
     padding: 14px 28px;
-    font-size: 1.1em;
+    font-size: var(--fs-medium);
     background: linear-gradient(145deg, var(--primary-color), var(--primary-hover));
     color: white;
     border: none;
@@ -101,25 +109,23 @@ button:active {
 /* Styling for the container that holds the pack cards */
 #card-container {
     margin-top: 5px;
-    display: flex;
-    flex-wrap: wrap; 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));
+    gap: clamp(4px, 1vw, 16px);
+    padding: clamp(4px, 1vw, 16px);
     justify-content: center; 
-    gap: 20px; 
-    padding: 20px;
     width: 100%;
     max-width: none;
     padding-bottom: 10px;
-    position: relative;
-    min-height: 300px;
 }
 
 /* Styling for the container that holds the pack cards */
 #high-rarity-cards {
-    display: flex;
-    flex-wrap: wrap; 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));
+    gap: clamp(4px, 1vw, 16px);
+    padding: clamp(4px, 1vw, 16px);
     justify-content: center; 
-    gap: 20px; 
-    padding: 20px;
     width: 100%;
     max-width: none;
 }
@@ -127,12 +133,15 @@ button:active {
 /* Styling for each card */
 .card {
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-    padding: 12px;
+    padding: clamp(8px, 2vw, 12px);
     border-radius: 16px;
     box-shadow: var(--card-shadow);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: var(--transition-smooth);
+    width: 100%;
+    max-width: clamp(100px, 30vw, 250px);
+    margin: auto;
 }
 
 .card:hover {
@@ -143,10 +152,9 @@ button:active {
 
 /* Image styling for the cards */
 .card img {
-    width: 160px;
-    max-width: 250px; 
+    width: 100%;
     height: auto;
-    border-radius: 12px;
+    aspect-ratio: 2.5/3.5;
     object-fit: cover;
     display: block; 
     margin: 0 auto;
@@ -251,7 +259,7 @@ button:active {
     flex-wrap: wrap; 
     justify-content: center; 
     gap: 10px; 
-    padding: 16px;
+    padding: clamp(12px, 2vw, 24px);
     font-family: "Hiragino Kaku Gothic Pro", "MS PGothic", arial, helvetica, sans-serif;
     font-weight: bold;
     background: rgba(255, 255, 255, 0.03);
@@ -436,8 +444,8 @@ footer a:hover {
 .modal-content {
     margin: auto;
     display: block;
-    max-width: 80%; /* Scale for smaller screens */
-    max-height: 80%;
+    max-width: min(90%, 800px);
+    max-height: 90vh;
     border-radius: 8px;
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
     transition: var(--transition-smooth);
@@ -502,7 +510,9 @@ nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    padding: 10px 0;
+    padding: clamp(4px, 1.5vw, 10px);
+    flex-wrap: wrap;
+    gap: clamp(4px, 1.5vw, 15px);
 }
 
 nav ul li {
@@ -515,6 +525,8 @@ nav ul li a {
     font-weight: 500;
     letter-spacing: 0.5px;
     position: relative;
+    font-size: var(--fs-small);
+    padding: clamp(6px, 1.5vw, 12px);
 }
 
 nav ul li a::after {
@@ -702,13 +714,13 @@ nav ul li a:hover::after {
     margin: 24px auto;
     max-width: 800px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+    gap: clamp(8px, 1.5vw, 16px);
 }
 
 #game-stats-container > div {
     background: rgba(255, 255, 255, 0.05);
-    padding: 16px;
+    padding: clamp(8px, 2vw, 16px);
     border-radius: 12px;
     transition: var(--transition-smooth);
 }
@@ -763,9 +775,9 @@ nav ul li a:hover::after {
 /* Pack List Styling */
 .pack-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: clamp(8px, 1.5vw, 24px);
+    padding: clamp(8px, 2vw, 24px);
 }
 
 .pack-card {
@@ -790,9 +802,9 @@ nav ul li a:hover::after {
 /* Stats Page Styling */
 .stats-overview {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    padding: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: clamp(10px, 2vw, 20px);
+    padding: clamp(10px, 2vw, 20px);
 }
 
 .stats-card {
@@ -1088,6 +1100,7 @@ nav {
     background: rgba(0, 0, 0, 0.5);
     border-radius: 0 0 12px 12px;
     margin-top: -4px;
+    font-size: var(--fs-small);
 }
 
 .card-name {
