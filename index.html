@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A booster pack opening simulator for Pokemon TCG Pocket.">
+    <meta name="keywords" content="Pokemon, TCG, Pocket, Booster, Pack, Simulator">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Pokemon Pocket Booster Pack Simulator">
+    <meta property="og:description" content="A booster pack opening simulator for Pokemon TCG Pocket.">
+    <meta property="og:image" content="https://imgur.com/ErsF5F5">
+    <meta property="og:url" content="https://example.com">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="./src/favicon/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="./src/favicon/apple-touch-icon.png">
+    <title>Pokemon Pocket Booster Pack Simulator</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#151d23">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#packs">Packs</a></li>
+            <li><a href="#stats">Stats</a></li>
+        </ul>
+    </nav>
+
+    <div id="scroll-wrapper">
+
+        <h1>Pokemon TCG Pocket Booster Pack Simulator</h1>
+
+        <div id="game-stats-container">
+            <div id="poke-gold">Poke Gold Used: 0</div>
+            <div id="money-spent">Est Money Spent: 0</div>
+            <div id="pack-points">Pack Points: 0</div>
+        </div>
+
+        <div id="stats-container">
+            <div id="four-diamonds">4♦: 0</div>
+            <div id="one-star">1★: 0</div>
+            <div id="two-star">2★: 0</div>
+            <div id="three-star">3★: 0</div>
+            <div id="Crown">Crown: 0</div>
+        </div>
+
+        <label for="pack-select">Choose a pack:</label>
+        <select id="pack-select">
+            <option value="charizard">Charizard Pack</option>
+            <option value="mewtwo">Mewtwo Pack</option>
+            <option value="pikachu">Pikachu Pack</option>
+        </select>
+
+        <button id="open-pack-button">Open Pack</button>
+        <button id="sort-pack-button">Sort Cards</button>
+
+        <div id="packs-opened-container">
+            Packs opened: <span id="packs-opened">0</span>
+        </div>
+
+        <div class="pack-preview"></div>
+
+        <div id="card-container"></div>
+
+        <div id="high-rarity-cards"></div>
+
+    </div>
+
+    <div id="card-modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-image">
+    </div>
+
+    <footer>
+        <div class="info">
+            <p>Not affiliated with <a href="https://tcgpocket.pokemon.com/en-us/" target="_blank">Pokemon TCG Pocket</a> or
+            <a href="https://www.gamefreak.co.jp/" target="_blank">Game Freak</a>.</p>
+            <p>Follow us on <a href="https://twitter.com" target="_blank">Twitter</a> | <a href="https://facebook.com" target="_blank">Facebook</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
