@@ -144,6 +144,25 @@ const pikachuPack = {
     9:[[283, "Mew"]]
 };
 
+const paPack = {
+    1: [
+        [287, "PA-04"], [288, "PA-05"],
+        [289, "PA-06"], [290, "PA-07"], [291, "PA-08"], [292, "PA-09"], [293, "PA-10"],
+    ],
+    2: [
+        [307, "PA-16"], [297, "PA-17"], [296, "PA-18"]
+    ],
+    3: [
+        [306, "PA-19"], [305, "PA-20"],[302,"PA-21"],[301,"PA-22"],[300,"PA-23"],
+    ],
+    4:[
+        [298,"PA-24"],[299,"PA-25"],[304,"PA-26"]
+    ],
+    7:[
+        [294,"PA-27"],[295,"PA-28"],[303,"PA-29"]
+    ]
+};
+
 // Rarity distribution
 const rarityDistribution = {
     1: [1.0, 0.0, 0.0],
@@ -308,13 +327,18 @@ function getRarity(slot) {
 
 // Function to get the selected pack data based on dropdown
 function getSelectedPack() {
-    const selectedPack = document.getElementById('pack-select').value;
-    if (selectedPack === 'charizard') {
-        return charizardPack;
-    } else if (selectedPack === 'mewtwo') {
-        return mewtwoPack;
-    } else if (selectedPack === 'pikachu') {
-        return pikachuPack;
+    const packSelect = document.getElementById('pack-select');
+    switch (packSelect.value) {
+        case 'charizard':
+            return charizardPack;
+        case 'mewtwo':
+            return mewtwoPack;
+        case 'pikachu':
+            return pikachuPack;
+        case 'pa':
+            return paPack;
+        default:
+            return charizardPack;
     }
 }
 
@@ -332,7 +356,6 @@ function openPack() {
     
     return pack;
 }
-
 // Declare a flag outside the event listener to track if the H2 has been added
 let h2Added = false;
 
@@ -757,3 +780,28 @@ async function openMultiplePacks(count) {
 document.getElementById('open-ten-packs-button').addEventListener('click', function() {
     openMultiplePacks(10); // Open 10 packs at once
 });
+
+function getCardImagePath(cardId, cardName, selectedPack) {
+    // Special handling for PA pack
+    if (selectedPack === paPack) {
+        // Format the number with leading zero if needed (01, 02, etc.)
+        const paddedNumber = cardId.toString().padStart(2, '0');
+        return `./src/A1-${paddedNumber}.jpg`;
+    }
+
+    // Existing logic for other packs
+    const cardNumber = cardId.toString().padStart(3, '0');
+    return `./src/cards/A${cardNumber}.png`;
+}
+
+// Update the card creation function to use this
+function createCard(cardId, cardName, rarity, selectedPack) {
+    const card = document.createElement('div');
+    card.className = `card rarity-${rarity}`;
+    
+    const img = document.createElement('img');
+    img.src = getCardImagePath(cardId, cardName, selectedPack);
+    img.alt = cardName;
+    
+    // ... rest of the card creation code ...
+}
