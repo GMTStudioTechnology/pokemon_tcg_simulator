@@ -1606,3 +1606,41 @@ button:hover {
 .close-settings:hover {
     background-color: #45a049;
 }
+
+#open-ten-packs-button {
+    background: linear-gradient(
+        135deg,
+        var(--primary-color),
+        var(--primary-hover)
+    );
+    position: relative;
+    overflow: hidden;
+}
+
+#open-ten-packs-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Add a special glow effect for the 10-pack button */
+#open-ten-packs-button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255,255,255,0.2),
+        transparent
+    );
+    transform: translateX(-100%);
+    transition: none;
+}
+
+#open-ten-packs-button:hover:not(:disabled)::before {
+    transform: translateX(100%);
+    transition: all 0.6s ease;
+}

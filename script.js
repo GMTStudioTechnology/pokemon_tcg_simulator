@@ -652,3 +652,102 @@ document.addEventListener('DOMContentLoaded', () => {
     bgmVolume.addEventListener('input', (e) => setVolume('bgm', e.target.value));
     toggleBGM.addEventListener('click', () => toggleMute('bgm'));
 });
+
+// Add function to open multiple packs
+async function openMultiplePacks(count) {
+    const packContainer = document.getElementById('card-container');
+    const rarePackContainer = document.getElementById('high-rarity-cards');
+    let h2Added = false;
+    
+    // Clear containers
+    packContainer.innerHTML = '';
+    rarePackContainer.innerHTML = '';
+    
+    // Disable both buttons during opening
+    const openPackButton = document.getElementById('open-pack-button');
+    const openTenPacksButton = document.getElementById('open-ten-packs-button');
+    openPackButton.disabled = true;
+    openTenPacksButton.disabled = true;
+
+    // Update stats first
+    for (let i = 0; i < count; i++) {
+        updatePacksOpened();
+        updatePokeGold();
+        updateMoneySpent();
+        updatePackPoints();
+    }
+
+    // Animate pack opening once
+    await animatePackOpening();
+
+    // Open all packs and collect cards
+    const allCards = [];
+    for (let i = 0; i < count; i++) {
+        const pack = openPack(); // This should return 5 cards per pack
+        allCards.push(...pack);
+        
+        // Add cards to collection and update history
+        pack.forEach(card => {
+            addToCollection(card);
+        });
+    }
+    
+    // Update card history once for all cards
+    updateCardHistory(allCards);
+
+    // Sort all cards by rarity (highest to lowest)
+    allCards.sort((a, b) => b.rarity - a.rarity);
+
+    // Create and append card elements with staggered animation
+    allCards.forEach((card, index) => {
+        const { dex, name, rarity } = card;
+        const cardDiv = document.createElement("div");
+        cardDiv.className = `card rarity-${rarity}`;
+        
+        const formattedDex = dex.toString().padStart(3, '0');
+        const image = document.createElement("img");
+        image.src = `./src/images/A1_${formattedDex}_EN.jpeg`;
+        image.alt = name;
+        
+        image.addEventListener("click", () => openModal(image.src));
+        
+        cardDiv.appendChild(image);
+        cardDiv.style.animation = `cardReveal 0.5s ${index * 0.1}s forwards`;
+        cardDiv.style.opacity = '0';
+        packContainer.appendChild(cardDiv);
+
+        // Handle rare cards (rarity 4 or higher)
+        if (rarity >= 4) {
+            const rareCardDiv = cardDiv.cloneNode(true);
+            rareCardDiv.querySelector('img').addEventListener("click", () => openModal(image.src));
+            rarePackContainer.appendChild(rareCardDiv);
+
+            if (!h2Added) {
+                const h2 = document.createElement("h2");
+                h2.textContent = "Rare Cards Obtained";
+                rarePackContainer.insertAdjacentElement('beforebegin', h2);
+                h2Added = true;
+            }
+
+            // Update rarity counters
+            switch(rarity) {
+                case 4: updateFourDiamonds(); break;
+                case 5: updateOneStar(); break;
+                case 6: updateTwoStar(); break;
+                case 7: updateThreeStar(); break;
+                case 8: updateCrown(); break;
+            }
+        }
+    });
+
+    // Re-enable buttons after animations
+    setTimeout(() => {
+        openPackButton.disabled = false;
+        openTenPacksButton.disabled = false;
+    }, allCards.length * 100 + 500);
+}
+
+// Add event listener for the ten packs button
+document.getElementById('open-ten-packs-button').addEventListener('click', function() {
+    openMultiplePacks(10); // Open 10 packs at once
+});
