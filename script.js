@@ -561,3 +561,117 @@ document.getElementById('reset-history').addEventListener('click', function() {
     }, 2000);
 });
 
+// Loading Screen Handler
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+        }, 500);
+    }, 1500);
+});
+
+// Achievement System
+const achievements = {
+    FIRST_PACK: { title: 'First Steps', description: 'Open your first pack', icon: '🎉' },
+    RARE_PULL: { title: 'Lucky!', description: 'Pull a rare card', icon: '✨' },
+    COLLECTION_MILESTONE: { title: 'Collector', description: 'Collect 50 unique cards', icon: '📚' }
+};
+
+function showAchievement(achievementId) {
+    const achievement = achievements[achievementId];
+    const achievementElement = document.createElement('div');
+    achievementElement.className = 'achievement';
+    achievementElement.innerHTML = `
+        <div class="achievement-icon">${achievement.icon}</div>
+        <div class="achievement-content">
+            <h3>${achievement.title}</h3>
+            <p>${achievement.description}</p>
+        </div>
+    `;
+    document.body.appendChild(achievementElement);
+    setTimeout(() => achievementElement.classList.add('show'), 100);
+    setTimeout(() => {
+        achievementElement.classList.remove('show');
+        setTimeout(() => achievementElement.remove(), 300);
+    }, 3000);
+}
+
+// Enhanced Card Reveal Animation
+function revealCard(cardElement, index) {
+    setTimeout(() => {
+        cardElement.classList.add('reveal');
+        playSFX('CARD_FLIP');
+        if (cardElement.dataset.rarity >= 4) {
+            createParticleEffect(cardElement);
+            playSFX('RARE_CARD');
+        }
+    }, index * 200);
+}
+
+// Particle Effect System
+function createParticleEffect(element) {
+    const colors = ['#FFD700', '#FFA500', '#FF4500'];
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.background = color;
+        particle.style.setProperty('--tx', `${(Math.random() - 0.5) * 200}px`);
+        particle.style.setProperty('--ty', `${(Math.random() - 0.5) * 200}px`);
+        particle.style.setProperty('--r', `${Math.random() * 360}deg`);
+        element.appendChild(particle);
+        setTimeout(() => particle.remove(), 1000);
+    }
+}
+
+// Enhanced Pack Selection
+document.querySelectorAll('.pack-preview').forEach(pack => {
+    pack.addEventListener('click', () => {
+        document.querySelectorAll('.pack-preview').forEach(p => {
+            p.style.transform = 'scale(0.95)';
+            p.style.opacity = '0.7';
+        });
+        pack.style.transform = 'scale(1.05)';
+        pack.style.opacity = '1';
+        playSFX('BUTTON_CLICK');
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Settings Modal Controls
+    const settingsModal = document.getElementById('settings-modal');
+    const settingsBtn = document.getElementById('settings-button');
+    const closeSettingsBtn = document.querySelector('.close-settings');
+    
+    settingsBtn.addEventListener('click', () => {
+        settingsModal.style.display = 'flex';
+    });
+
+    closeSettingsBtn.addEventListener('click', () => {
+        settingsModal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === settingsModal) {
+            settingsModal.style.display = 'none';
+        }
+    });
+
+    // Volume Controls
+    const bgmVolume = document.getElementById('bgm-volume');
+    const sfxVolume = document.getElementById('sfx-volume');
+    const toggleBGM = document.getElementById('toggle-bgm');
+    const toggleSFX = document.getElementById('toggle-sfx');
+
+    bgmVolume.value = localStorage.getItem('bgmVolume') || 0.3;
+    sfxVolume.value = localStorage.getItem('sfxVolume') || 0.2;
+
+    bgmVolume.addEventListener('input', (e) => setVolume('bgm', e.target.value));
+    sfxVolume.addEventListener('input', (e) => setVolume('sfx', e.target.value));
+    toggleBGM.addEventListener('click', () => toggleMute('bgm'));
+    toggleSFX.addEventListener('click', () => toggleMute('sfx'));
+});
+
