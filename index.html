@@ -12,10 +12,10 @@
     <meta property="og:image" content="https://imgur.com/ErsF5F5">
     <meta property="og:url" content="https://example.com">
     <meta property="og:type" content="website">
-    <link rel="icon" href="../../src/favicon/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="../../src/favicon/apple-touch-icon.png">
+    <link rel="icon" href="./src/favicon/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="./src/favicon/apple-touch-icon.png">
     <title>Pokemon tcg pocket open Pack Simulator</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="./UI/style.css">
     <meta name="theme-color" content="#151d23">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -24,14 +24,14 @@
 <body>
     <div id="loading-screen">
         <div class="loader">
-            <img src="../../src/favicon/load.png" alt="Loading..." class="rotating">
+            <img src="./src/favicon/load.png" alt="Loading..." class="rotating">
             <div class="loading-text">Loading...</div>
         </div>
     </div>
-    <script src="../../src/audio/audio.js"></script>
+    <script src="./src/audio/audio.js"></script>
     <script>
-        window.addEventListener('load', function() {
-            playBGM('../../src/audio/1.mp3');
+        document.addEventListener('DOMContentLoaded', function() {
+            playBGM('./src/audio/1.mp3');
         });
     </script>
     <script>
@@ -42,9 +42,9 @@
     <nav>
         <ul>
             <li><a href="index.html" class="nav-link active">Home</a></li>
-            <li><a href="packs.html" class="nav-link">Packs</a></li>
-            <li><a href="stats.html" class="nav-link">Stats</a></li>
-            <li><a href="collection.html" class="nav-link">Collection</a></li>
+            <li><a href="./UI/components/packs.html" class="nav-link">Packs</a></li>
+            <li><a href="./UI/components/stats.html" class="nav-link">Stats</a></li>
+            <li><a href="./UI/components/collection.html" class="nav-link">Collection</a></li>
         </ul>
     </nav>
 
@@ -54,19 +54,19 @@
 
         <div class="pack-preview-container">
             <div class="pack-preview active" data-pack="charizard">
-                <img src="../../src/favicon/pack_charizard.jpg" alt="Charizard Pack">
+                <img src="./src/favicon/pack_charizard.jpg" alt="Charizard Pack">
                 <span class="pack-name">Charizard Pack</span>
             </div>
             <div class="pack-preview" data-pack="mewtwo">
-                <img src="../../src/favicon/pack_mewtwo.jpg" alt="Mewtwo Pack">
+                <img src="./src/favicon/pack_mewtwo.jpg" alt="Mewtwo Pack">
                 <span class="pack-name">Mewtwo Pack</span>
             </div>
             <div class="pack-preview" data-pack="pikachu">
-                <img src="../../src/favicon/pack_pikachu.jpg" alt="Pikachu Pack">
+                <img src="./src/favicon/pack_pikachu.jpg" alt="Pikachu Pack">
                 <span class="pack-name">Pikachu Pack</span>
             </div>
             <div class="pack-preview" data-pack="pa">
-                <img src="../../src/images/A1_287_EN.jpeg" alt="PA Pack">
+                <img src="./src/images/A1_287_EN.jpeg" alt="PA Pack">
                 <span class="pack-name">Special / Utility Pack</span>
             </div>
         </div>
@@ -153,6 +153,6 @@
     });
     </script>
 
-    <script src="../js/script.js"></script>
+    <script src="./UI/js/script.js"></script>
 </body>
 </html>

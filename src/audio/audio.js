@@ -9,13 +9,15 @@ function initAudio(musicPath) {
 }
 
 function playBGM(musicPath = './1.mp3') {
-    if (bgm && bgm.src !== musicPath) {
-        bgm.pause();
-        bgm = null;
+    if (!bgm || bgm.src !== musicPath) {
+        if (bgm) {
+            bgm.pause();
+        }
+        initAudio(musicPath);
     }
-    initAudio(musicPath);
     bgm.play().catch(function(error) {
         console.log("Audio autoplay failed:", error);
+        // Consider prompting the user to interact with the page to enable audio
     });
 }
 
