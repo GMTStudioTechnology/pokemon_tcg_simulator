@@ -40,25 +40,35 @@
             <div class="stats-card total-opened">
                 <h2>Total Packs Opened</h2>
                 <div id="total-packs" class="stat-number">0</div>
+                <div class="stat-trend">
+                    <span class="trend-label">Trend:</span>
+                    <span id="pack-trend" class="trend-value">↑ 12% this week</span>
+                </div>
             </div>
 
             <div class="stats-card rarity-breakdown">
                 <h2>Rarity Breakdown</h2>
                 <div id="rarity-stats">
-                    <div id="four-diamonds">4♦: 0</div>
-                    <div id="one-star">1★: 0</div>
-                    <div id="two-star">2★: 0</div>
-                    <div id="three-star">3★: 0</div>
-                    <div id="Crown">Crown: 0</div>
+                    <div id="four-diamonds" class="rarity-stat">4♦: 0</div>
+                    <div id="one-star" class="rarity-stat">1★: 0</div>
+                    <div id="two-star" class="rarity-stat">2★: 0</div>
+                    <div id="three-star" class="rarity-stat">3★: 0</div>
+                    <div id="Crown" class="rarity-stat">Crown: 0</div>
                 </div>
+                <div id="rarity-chart" class="chart-container"></div>
             </div>
 
             <div class="stats-card resources">
                 <h2>Resources</h2>
-                <div id="poke-gold">Poke Gold Used: 0</div>
-                <div id="money-spent">Est Money Spent: $0</div>
-                <div id="pack-points">Pack Points: 0</div>
+                <div id="poke-gold" class="resource-stat">Poke Gold Used: 0</div>
+                <div id="money-spent" class="resource-stat">Est Money Spent: $0</div>
+                <div id="pack-points" class="resource-stat">Pack Points: 0</div>
             </div>
+        </div>
+
+        <div class="stats-actions">
+            <button id="reset-stats" class="danger-button">Reset Stats</button>
+            <button id="export-stats" class="primary-button">Export Stats</button>
         </div>
     </div>
 </body>

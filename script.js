@@ -339,13 +339,8 @@ function animatePackOpening() {
         const packVisual = document.createElement('div');
         packVisual.className = 'pack-visual loading';
         const selectedPack = document.getElementById('pack-select').value;
-        packVisual.style.backgroundImage = `url('./src/images/pack_${selectedPack}.png')`;
+        packVisual.style.backgroundImage = `url('./src/favicon/pack_${selectedPack}.jpg')`;
         packContainer.appendChild(packVisual);
-
-        // Add sound effect
-        const openSound = new Audio('./src/sounds/pack_open.mp3');
-        openSound.play().catch(() => {}); // Catch errors if sound can't play
-
         setTimeout(() => {
             packVisual.classList.add('opening');
             setTimeout(() => {
@@ -533,15 +528,6 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
-// Add card hover effect sound
-document.addEventListener('mouseover', (e) => {
-    if (e.target.closest('.card')) {
-        const hoverSound = new Audio('./src/sounds/card_hover.mp3');
-        hoverSound.volume = 0.2;
-        hoverSound.play().catch(() => {});
-    }
-}, { passive: true });
-
 // Add reset history functionality
 document.getElementById('reset-history').addEventListener('click', function() {
     // Clear the card history list
@@ -602,10 +588,8 @@ function showAchievement(achievementId) {
 function revealCard(cardElement, index) {
     setTimeout(() => {
         cardElement.classList.add('reveal');
-        playSFX('CARD_FLIP');
         if (cardElement.dataset.rarity >= 4) {
             createParticleEffect(cardElement);
-            playSFX('RARE_CARD');
         }
     }, index * 200);
 }
@@ -635,7 +619,6 @@ document.querySelectorAll('.pack-preview').forEach(pack => {
         });
         pack.style.transform = 'scale(1.05)';
         pack.style.opacity = '1';
-        playSFX('BUTTON_CLICK');
     });
 });
 
@@ -662,16 +645,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Volume Controls
     const bgmVolume = document.getElementById('bgm-volume');
-    const sfxVolume = document.getElementById('sfx-volume');
     const toggleBGM = document.getElementById('toggle-bgm');
-    const toggleSFX = document.getElementById('toggle-sfx');
 
     bgmVolume.value = localStorage.getItem('bgmVolume') || 0.3;
-    sfxVolume.value = localStorage.getItem('sfxVolume') || 0.2;
 
     bgmVolume.addEventListener('input', (e) => setVolume('bgm', e.target.value));
-    sfxVolume.addEventListener('input', (e) => setVolume('sfx', e.target.value));
     toggleBGM.addEventListener('click', () => toggleMute('bgm'));
-    toggleSFX.addEventListener('click', () => toggleMute('sfx'));
 });
-

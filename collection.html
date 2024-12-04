@@ -18,12 +18,12 @@
     <meta name="theme-color" content="#151d23">
 </head>
 <body>
-    <script src="audio.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        playBGM('./4.mp3');
-    });
-</script>
+    <script src="audio.js" defer></script>
+    <script>
+        window.addEventListener('load', function() {
+            playBGM('./4.mp3');
+        });
+    </script>
     <nav>
         <ul>
             <li><a href="index.html" class="nav-link">Home</a></li>
@@ -37,32 +37,72 @@
         <h1>Your Collection</h1>
         
         <div class="collection-filters">
-            <select id="rarity-filter">
-                <option value="all">All Rarities</option>
-                <option value="4">4♦ Cards</option>
-                <option value="5">1★ Cards</option>
-                <option value="6">2★ Cards</option>
-                <option value="7">3★ Cards</option>
-                <option value="8">Crown Cards</option>
-            </select>
-            <button id="sort-collection">Sort Cards</button>
-            <button id="reset-collection" class="reset-button">Reset Collection</button>
+            <div class="filter-group">
+                <label for="rarity-filter">Rarity:</label>
+                <select id="rarity-filter">
+                    <option value="all">All Rarities</option>
+                    <option value="4">4♦ Cards</option>
+                    <option value="5">1★ Cards</option>
+                    <option value="6">2★ Cards</option>
+                    <option value="7">3★ Cards</option>
+                    <option value="8">Crown Cards</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="set-filter">Set:</label>
+                <select id="set-filter">
+                    <option value="all">All Sets</option>
+                    <option value="base">Base Set</option>
+                    <option value="jungle">Jungle</option>
+                    <option value="fossil">Fossil</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="type-filter">Type:</label>
+                <select id="type-filter">
+                    <option value="all">All Types</option>
+                    <option value="normal">Normal</option>
+                    <option value="fire">Fire</option>
+                    <option value="water">Water</option>
+                    <option value="electric">Electric</option>
+                    <option value="grass">Grass</option>
+                    <option value="fighting">Fighting</option>
+                    <option value="psychic">Psychic</option>
+                </select>
+            </div>
+
+            <div class="filter-actions">
+                <button id="sort-collection" class="action-button">
+                    <i class="fas fa-sort"></i> Sort Cards
+                </button>
+                <button id="view-mode" class="action-button">
+                    <i class="fas fa-th"></i> Toggle View
+                </button>
+                <button id="reset-collection" class="reset-button">
+                    <i class="fas fa-trash"></i> Reset
+                </button>
+            </div>
         </div>
 
-        <div id="collection-container">
+
+        <div id="collection-container" class="grid-view">
             <!-- Cards will be dynamically added here -->
         </div>
-    </div>
 
-    <div class="collection-stats">
-        <h2>Collection Stats</h2>
-        <div id="collection-summary">
-            <div>Total Unique Cards: <span id="unique-cards">0</span></div>
-            <div>Total Cards: <span id="total-cards">0</span></div>
-            <div>Collection Completion: <span id="completion-rate">0%</span></div>
+        <div id="no-cards-message" class="hidden">
+            <i class="fas fa-search"></i>
+            <p>No cards found matching your filters</p>
         </div>
     </div>
 
+    <!-- Add loading spinner -->
+    <div id="loading-spinner" class="hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="collection.js"></script>
 </body>
 </html> 
