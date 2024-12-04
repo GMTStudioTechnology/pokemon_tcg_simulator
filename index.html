@@ -52,14 +52,42 @@
     </div>
     <script src="./src/audio/audio.js"></script>
     <script>
+        // Create audio objects
+        const bgm1Audio = new Audio('./src/audio/1.mp3');
+        const bgm5Audio = new Audio('./src/audio/5.mp3');
+        
+        // BGM setup
+        bgm1Audio.loop = true;
+        bgm1Audio.volume = 1.0;
+        
         document.addEventListener('DOMContentLoaded', function() {
-            playBGM('./src/audio/1.mp3');
+            bgm1Audio.play().catch(error => console.log('BGM autoplay prevented:', error));
         });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            playBGM();
-        });
+
+        // Pack opening sound handling
+        function handlePackOpen() {
+            bgm1Audio.pause(); // Stop BGM 1
+            bgm5Audio.currentTime = 0; // Reset BGM 5 to start
+            bgm5Audio.play().then(() => {
+                // When BGM 5 ends, resume BGM 1
+                bgm5Audio.addEventListener('ended', function() {
+                    bgm1Audio.play(); // Resume BGM 1
+                }, { once: true });
+            });
+        }
+
+        // Add audio handling to existing functions
+        const originalOpenPack = window.openPack;
+        window.openPack = function() {
+            handlePackOpen();
+            originalOpenPack();
+        };
+
+        const originalOpenTenPacks = window.openTenPacks;
+        window.openTenPacks = function() {
+            handlePackOpen();
+            originalOpenTenPacks();
+        };
     </script>
     <nav>
         <ul>
@@ -123,8 +151,8 @@
                 <option value="pikachu">Pikachu Pack</option>
                 <option value="pa">PA Pack</option>
             </select>
-            <button id="open-pack-button">Open Pack</button>
-            <button id="open-ten-packs-button">Open 10 Packs</button>
+            <button id="open-pack-button" onclick="openPack(); handlePackOpen();">Open Pack</button>
+            <button id="open-ten-packs-button" onclick="openTenPacks(); handlePackOpen();">Open 10 Packs</button>
             <button id="sort-pack-button">Sort Cards</button>
         </div>
 
