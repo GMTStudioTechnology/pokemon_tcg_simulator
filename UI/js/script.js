@@ -800,18 +800,7 @@ document.getElementById('open-ten-packs-button').addEventListener('click', funct
     openMultiplePacks(10); // Open 10 packs at once
 });
 
-function getCardImagePath(cardId, cardName, selectedPack) {
-    // Special handling for PA pack
-    if (selectedPack === paPack) {
-        // Format the number with leading zero if needed (01, 02, etc.)
-        const paddedNumber = cardId.toString().padStart(2, '0');
-        return `../../src/images/A1_${cardId}_EN.jpeg`;
-    }
 
-    // Existing logic for other packs
-    const cardNumber = cardId.toString().padStart(3, '0');
-    return `../../src/images/A1_${cardId}_EN.jpeg`;
-}
 // Update the card creation function to use this
 function createCard(cardId, cardName, rarity, selectedPack) {
     const card = document.createElement('div');
@@ -832,7 +821,7 @@ function createCardElement(cardId, cardName, rarity) {
     const cardImage = document.createElement('img');
     cardImage.src = `../../src/images/A1_${cardId}_EN.jpeg`;
     cardImage.alt = cardName;
-    
+
     // Add click event listener to the card image
     cardImage.addEventListener('click', function() {
         const modal = document.getElementById('card-modal');
