@@ -368,7 +368,7 @@ function animatePackOpening() {
         const packVisual = document.createElement('div');
         packVisual.className = 'pack-visual loading';
         const selectedPack = document.getElementById('pack-select').value;
-        packVisual.style.backgroundImage = `url('./src/favicon/pack_${selectedPack}.jpg')`;
+        packVisual.style.backgroundImage = `url('../src/favicon/pack_${selectedPack}.jpg')`;
         packContainer.appendChild(packVisual);
         setTimeout(() => {
             packVisual.classList.add('opening');
@@ -447,7 +447,7 @@ document.getElementById('open-pack-button').addEventListener('click', async func
         
         const formattedDex = dex.toString().padStart(3, '0');
         const image = document.createElement("img");
-        image.src = `./src/images/A1_${formattedDex}_EN.jpeg`;
+        image.src = `../../src/images/A1_${formattedDex}_EN.jpeg`;
         image.alt = name;
         
         image.onclick = function() {
@@ -517,7 +517,7 @@ document.getElementById("sort-pack-button").addEventListener("click", () => {
         const cardDiv = document.createElement("div");
         cardDiv.className = `card rarity-${rarity}`;
         const image = document.createElement("img");
-        image.src = `./src/images/A1_${dex.toString().padStart(3, '0')}_EN.jpeg`;
+        image.src = `../../src/images/A1_${dex.toString().padStart(3, '0')}_EN.jpeg`;
         image.alt = name;
         image.addEventListener("click", () => openModal(image.src));
         cardDiv.appendChild(image);
@@ -805,14 +805,13 @@ function getCardImagePath(cardId, cardName, selectedPack) {
     if (selectedPack === paPack) {
         // Format the number with leading zero if needed (01, 02, etc.)
         const paddedNumber = cardId.toString().padStart(2, '0');
-        return `./src/A1-${paddedNumber}.jpg`;
+        return `../../src/images/A1_${cardId}_EN.jpeg`;
     }
 
     // Existing logic for other packs
     const cardNumber = cardId.toString().padStart(3, '0');
-    return `./src/cards/A${cardNumber}.png`;
+    return `../../src/images/A1_${cardId}_EN.jpeg`;
 }
-
 // Update the card creation function to use this
 function createCard(cardId, cardName, rarity, selectedPack) {
     const card = document.createElement('div');
@@ -831,7 +830,7 @@ function createCardElement(cardId, cardName, rarity) {
     card.className = `card rarity-${rarity}`;
     
     const cardImage = document.createElement('img');
-    cardImage.src = `./src/images/A1_${cardId}_EN.jpeg`;
+    cardImage.src = `../../src/images/A1_${cardId}_EN.jpeg`;
     cardImage.alt = cardName;
     
     // Add click event listener to the card image

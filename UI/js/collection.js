@@ -56,7 +56,7 @@ function displayCollection() {
         cardDiv.className = `card rarity-${card.rarity}`;
         
         const cardContent = `
-            <img src="./src/images/A1_${card.dex.toString().padStart(3, '0')}_EN.jpeg" 
+            <img src="../../src/images/A1_${card.dex.toString().padStart(3, '0')}_EN.jpeg" 
                  alt="${card.name}" 
                  onclick="openModal(this.src)">
             <div class="card-details">
