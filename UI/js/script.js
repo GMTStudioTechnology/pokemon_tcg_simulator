@@ -845,3 +845,71 @@ function createCardElement(cardId, cardName, rarity) {
     return card;
 }
 
+// Enhanced Pack Preview Functionality
+document.querySelectorAll('.pack-preview').forEach(preview => {
+    // Skip the PA pack in these animations
+    if (preview.dataset.pack !== 'pa') {
+        // Add hover effect
+        preview.addEventListener('mouseenter', () => {
+            preview.style.transform = 'scale(1.05) rotate(2deg)';
+            preview.style.transition = 'all 0.3s ease';
+            preview.style.zIndex = '1';
+            preview.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)';
+        });
+
+        preview.addEventListener('mouseleave', () => {
+            preview.style.transform = 'scale(1) rotate(0deg)';
+            preview.style.zIndex = '0';
+            preview.style.boxShadow = 'none';
+        });
+
+        // Add click animation
+        preview.addEventListener('click', () => {
+            // Remove active class and reset styles from all previews
+            document.querySelectorAll('.pack-preview').forEach(p => {
+                if (p.dataset.pack !== 'pa') {
+                    p.classList.remove('active');
+                    p.style.transform = 'scale(0.95)';
+                    p.style.opacity = '0.7';
+                    p.style.transition = 'all 0.3s ease';
+                }
+            });
+
+            // Add active class and styles to clicked preview
+            preview.classList.add('active');
+            preview.style.transform = 'scale(1.05)';
+            preview.style.opacity = '1';
+            
+            // Update pack select value
+            document.getElementById('pack-select').value = preview.dataset.pack;
+            
+            // Add a quick pulse animation
+            preview.style.animation = 'pulse 0.3s ease';
+            setTimeout(() => {
+                preview.style.animation = '';
+            }, 300);
+        });
+    }
+});
+
+// Add this if you don't already have it in your CSS
+// You can add this through JavaScript
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes pulse {
+        0% { transform: scale(1.05); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1.05); }
+    }
+
+    .pack-preview img {
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .pack-preview.active img {
+        border: 3px solid #4b9ad2;
+    }
+`;
+document.head.appendChild(style);
+

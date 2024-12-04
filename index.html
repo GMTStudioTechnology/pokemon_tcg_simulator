@@ -15,10 +15,14 @@
     <link rel="icon" href="./src/favicon/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="./src/favicon/apple-touch-icon.png">
     <title>Pokemon tcg pocket open Pack Simulator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="stylesheet" href="./UI/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="theme-color" content="#151d23">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -29,6 +33,9 @@
                         'background-dark': '#151d23',
                         'nav-background': '#26343f',
                         'text-light': 'hsl(207, 97%, 87%)'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
                     }
                 }
             }
@@ -69,15 +76,15 @@
 
         <div class="pack-preview-container">
             <div class="pack-preview active" data-pack="charizard">
-                <img src="./src/favicon/pack_charizard.jpg" alt="Charizard Pack">
-                <span class="pack-name">Charizard Pack</span>
+                <img src="./src/favicon/pack_charizard.jpg" alt="Charizard Pack" class="rounded-lg">
+                <span class="pack-name" className="">Charizard Pack</span>
             </div>
             <div class="pack-preview" data-pack="mewtwo">
-                <img src="./src/favicon/pack_mewtwo.jpg" alt="Mewtwo Pack">
+                <img src="./src/favicon/pack_mewtwo.jpg" alt="Mewtwo Pack" class="rounded-lg">
                 <span class="pack-name">Mewtwo Pack</span>
             </div>
             <div class="pack-preview" data-pack="pikachu">
-                <img src="./src/favicon/pack_pikachu.jpg" alt="Pikachu Pack">
+                <img src="./src/favicon/pack_pikachu.jpg" alt="Pikachu Pack" class="rounded-lg">
                 <span class="pack-name">Pikachu Pack</span>
             </div>
             <div class="pack-preview" data-pack="pa">
@@ -150,6 +157,17 @@
     const modal = document.getElementById('card-modal');
     const modalImg = document.getElementById('modal-image');
     const closeBtn = document.getElementsByClassName('close')[0];
+
+    function openModal(imageSrc) {
+        modal.style.display = "block";
+        modalImg.src = imageSrc;
+    }
+
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('card-image')) {
+            openModal(event.target.src);
+        }
+    });
 
     closeBtn.onclick = function() {
         modal.style.display = "none";
