@@ -126,6 +126,27 @@
         <img class="modal-content" id="modal-image">
     </div>
 
+    <script>
+    const modal = document.getElementById('card-modal');
+    const modalImg = document.getElementById('modal-image');
+    const closeBtn = document.getElementsByClassName('close')[0];
+
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    modal.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && modal.style.display === "block") {
+            modal.style.display = "none";
+        }
+    });
+    </script>
 
     <script src="script.js"></script>
 </body>

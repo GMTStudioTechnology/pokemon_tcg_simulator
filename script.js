@@ -450,7 +450,12 @@ document.getElementById('open-pack-button').addEventListener('click', async func
         image.src = `./src/images/A1_${formattedDex}_EN.jpeg`;
         image.alt = name;
         
-        image.addEventListener("click", () => openModal(image.src));
+        image.onclick = function() {
+            const modal = document.getElementById('card-modal');
+            const modalImg = document.getElementById('modal-image');
+            modalImg.src = this.src;
+            modal.style.display = "block";
+        };
         
         cardDiv.appendChild(image);
         cardDiv.style.animation = `cardReveal 0.5s ${i * 0.2}s forwards`;
@@ -460,7 +465,12 @@ document.getElementById('open-pack-button').addEventListener('click', async func
         // Handle rare cards
         if (rarity >= 4) {
             const rareCardDiv = cardDiv.cloneNode(true);
-            rareCardDiv.querySelector('img').addEventListener("click", () => openModal(image.src));
+            rareCardDiv.querySelector('img').onclick = function() {
+                const modal = document.getElementById('card-modal');
+                const modalImg = document.getElementById('modal-image');
+                modalImg.src = this.src;
+                modal.style.display = "block";
+            };
             rarePackContainer.appendChild(rareCardDiv);
 
             if (!h2Added) {
@@ -738,7 +748,12 @@ async function openMultiplePacks(count) {
         image.src = `./src/images/A1_${formattedDex}_EN.jpeg`;
         image.alt = name;
         
-        image.addEventListener("click", () => openModal(image.src));
+        image.onclick = function() {
+            const modal = document.getElementById('card-modal');
+            const modalImg = document.getElementById('modal-image');
+            modalImg.src = this.src;
+            modal.style.display = "block";
+        };
         
         cardDiv.appendChild(image);
         cardDiv.style.animation = `cardReveal 0.5s ${index * 0.1}s forwards`;
@@ -748,7 +763,12 @@ async function openMultiplePacks(count) {
         // Handle rare cards (rarity 4 or higher)
         if (rarity >= 4) {
             const rareCardDiv = cardDiv.cloneNode(true);
-            rareCardDiv.querySelector('img').addEventListener("click", () => openModal(image.src));
+            rareCardDiv.querySelector('img').onclick = function() {
+                const modal = document.getElementById('card-modal');
+                const modalImg = document.getElementById('modal-image');
+                modalImg.src = this.src;
+                modal.style.display = "block";
+            };
             rarePackContainer.appendChild(rareCardDiv);
 
             if (!h2Added) {
@@ -775,7 +795,6 @@ async function openMultiplePacks(count) {
         openTenPacksButton.disabled = false;
     }, allCards.length * 100 + 500);
 }
-
 // Add event listener for the ten packs button
 document.getElementById('open-ten-packs-button').addEventListener('click', function() {
     openMultiplePacks(10); // Open 10 packs at once
@@ -805,3 +824,25 @@ function createCard(cardId, cardName, rarity, selectedPack) {
     
     // ... rest of the card creation code ...
 }
+
+// Function to create a card element
+function createCardElement(cardId, cardName, rarity) {
+    const card = document.createElement('div');
+    card.className = `card rarity-${rarity}`;
+    
+    const cardImage = document.createElement('img');
+    cardImage.src = `./src/images/A1_${cardId}_EN.jpeg`;
+    cardImage.alt = cardName;
+    
+    // Add click event listener to the card image
+    cardImage.addEventListener('click', function() {
+        const modal = document.getElementById('card-modal');
+        const modalImg = document.getElementById('modal-image');
+        modal.style.display = "block";
+        modalImg.src = this.src;
+    });
+
+    card.appendChild(cardImage);
+    return card;
+}
+
