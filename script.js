@@ -43,7 +43,8 @@ const charizardPack = {
     ],
     8: [
         [284, "Charizard EX"], [285, "Pikachu EX"], [286, "Mewtwo EX"]
-    ]
+    ],
+    9:[[283, "Mew"]]
 };
 
 const mewtwoPack = {
@@ -90,6 +91,9 @@ const mewtwoPack = {
     ],
     8: [
         [284, "Charizard EX"], [285, "Pikachu EX"], [286, "Mewtwo EX"]
+    ],
+    9:[
+        [283,"Mew "]
     ]
 };
 
@@ -136,7 +140,8 @@ const pikachuPack = {
     ],
     8: [
         [284, "Charizard EX"], [285, "Pikachu EX"], [286, "Mewtwo EX"]
-    ]
+    ],
+    9:[[283, "Mew"]]
 };
 
 // Rarity distribution
@@ -148,7 +153,8 @@ const rarityDistribution = {
     5: [0.0, 0.02572, 0.10288],
     6: [0.0, 0.005, 0.02],
     7: [0.0, 0.00222, 0.00888],
-    8: [0.0, 0.0004, 0.0016]
+    8: [0.0, 0.0004, 0.0016],
+    9: [0.0, 0.0001, 0.0012]
 };
 
 // Helper function: Calc est money spent based on packs opened
